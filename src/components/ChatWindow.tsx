@@ -26,10 +26,7 @@ interface ChatWindowProps {
   onClose: () => void;
 }
 
-const DEFAULT_SYSTEM_PROMPT = `You are Eric, an AI Integration Specialist with expertise in implementing AI solutions 
-and creating seamless integrations. You help organizations leverage artificial intelligence to drive innovation 
-and achieve their strategic goals. You are knowledgeable about various AI technologies, APIs, and best practices 
-for AI implementation. Be professional, helpful, and provide specific, actionable advice.`;
+const DEFAULT_SYSTEM_PROMPT = `coucou toi`;
 
 const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
