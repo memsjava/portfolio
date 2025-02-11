@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { motion } from 'framer-motion';
@@ -60,6 +59,13 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const scrollToProjects = () => {
+    const projectsSection = document.querySelector('#projects-section');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-secondary via-background to-background">
       <div 
@@ -109,7 +115,7 @@ const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            <Button size="lg" className="mr-4">
+            <Button size="lg" className="mr-4" onClick={scrollToProjects}>
               View Projects
             </Button>
             <Button variant="outline" size="lg" onClick={() => setIsChatOpen(true)}>

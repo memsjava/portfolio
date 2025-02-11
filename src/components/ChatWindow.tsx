@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -59,38 +60,38 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const loadCurrentSession = async () => {
     try {
-      const response = await fetch('https://trano-vacance.mg/chat/current-session', fetchConfig);
+      const response = await fetch('http://localhost:5050/chat/current-session', fetchConfig);
       
       if (response.ok) {
         const session = await response.json();
         setMessages(session.messages.length > 0 ? session.messages : [{
           role: 'assistant',
-          content: "Hi! I'm your AI Integration Specialist. How can I help you today?"
+          content: "Hi! I'm Eric. A Specialist AI Integration. How can I help you today??"
         }]);
       } else {
         setMessages([{
           role: 'assistant',
-          content: "Hi! I'm your AI Integration Specialist. How can I help you today?"
+          content: "Hi! I'm Eric. A Specialist AI Integration. How can I help you today??"
         }]);
       }
     } catch (error) {
       console.error('Error loading session:', error);
       setMessages([{
         role: 'assistant',
-        content: "Hi! I'm your AI Integration Specialist. How can I help you today?"
+        content: "Hi! I'm Eric. A Specialist AI Integration. How can I help you today??"
       }]);
     }
   };
 
   const clearSession = async () => {
     try {
-      await fetch('https://trano-vacance.mg/chat/sessions/clear', {
+      await fetch('http://localhost:5050/chat/sessions/clear', {
         ...fetchConfig,
         method: 'POST',
       });
       setMessages([{
         role: 'assistant',
-        content: "Hi! I'm your AI Integration Specialist. How can I help you today?"
+        content: "Hi! I'm Eric. A Specialist AI Integration. How can I help you today??"
       }]);
     } catch (error) {
       console.error('Error clearing session:', error);
@@ -106,12 +107,12 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://trano-vacance.mg/chat/message', {
+      const response = await fetch('http://localhost:5050/chat/message', {
         ...fetchConfig,
         method: 'POST',
         body: JSON.stringify({
           messages: [...messages, userMessage],
-          system_prompt: systemPrompt,
+          system_prompt: true
         }),
       });
 
@@ -171,24 +172,26 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
           </div>
           <div className="h-[400px] p-4 overflow-y-auto">
             <div className="space-y-4">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`${
-                    message.role === 'user'
-                      ? 'ml-auto bg-primary text-primary-foreground'
-                      : 'bg-accent'
-                  } rounded-lg p-3 max-w-[80%]`}
-                >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                </div>
-              ))}
+              <div className="chat-messages" ref={messagesEndRef}>
+                {messages.map((message, index) => (
+                  <div key={index} 
+                    className={`message ${message.role} ${
+                      message.role === 'user'
+                        ? 'ml-auto bg-primary text-primary-foreground'
+                        : 'bg-accent'
+                    } rounded-lg p-3 max-w-[80%]`}
+                  >
+                    <ReactMarkdown className="text-sm prose prose-sm dark:prose-invert max-w-none">
+                      {message.content}
+                    </ReactMarkdown>
+                  </div>
+                ))}
+              </div>
               {isLoading && (
                 <div className="bg-accent rounded-lg p-3 max-w-[80%]">
                   <p className="text-sm">Thinking...</p>
                 </div>
               )}
-              <div ref={messagesEndRef} />
             </div>
           </div>
           <div className="p-4 border-t border-border">

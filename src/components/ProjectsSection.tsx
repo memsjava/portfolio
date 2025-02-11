@@ -9,27 +9,36 @@ interface ProjectsSectionProps {
 const projects = [
   {
     title: "AI Chat message & voice bot",
-    description: "Implemented a custom GPT-based chatbot for customer service",
+    description: "Developed a WhatsApp chatbot for vehicle assistance using OpenAI. Integrated voice & text processing for seamless user interactions",
     tags: ["OpenAI", "React", "Node.js"],
-    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+    image: "https://plus.unsplash.com/premium_photo-1683936163516-ec4c53227e26?q=80&w=2884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://plus.unsplash.com/premium_photo-1683936163516-ec4c53227e26?q=80&w=2884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "https://www.charlie24.com/en-LU/"
   },
   {
     title: "Computer Vision System",
-    description: "Developed an ML-powered quality control system",
+    description: "Developed an AI-powered computer vision system for real-time paddle tennis ball tracking and game analysis",
     tags: ["TensorFlow", "Python", "AWS"],
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+    image: "https://media.istockphoto.com/id/1517473680/photo/paddle-tennis-player-making-an-effort-to-while-hitting-the-ball-during-a-match-on-outdoor.jpg?s=1024x1024&w=is&k=20&c=XcC8U8uBQ8KXYcjTNu7Zev6w3EdGa6iPbCeyJpK9ukQ=",
+    link: "https://www.gamecam.live/purchase/"
   },
   {
-    title: "NLP Pipeline",
-    description: "Built a scalable natural language processing pipeline",
-    tags: ["BERT", "FastAPI", "Docker"],
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+    title: "AI-Powered Trading Bot",
+    description: "Developed an AI-driven crypto trading bot using machine learning for price prediction and automated trading strategies",
+    tags: ["Python", "Machine Learning", "Crypto"],
+    image: "https://plus.unsplash.com/premium_photo-1675876765105-f1422c25011a?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "https://yexo.io"
   }
 ];
 
 const ProjectsSection = ({ onOpenChat }: ProjectsSectionProps) => {
+
+  function openLink(link: string): void {
+    // open link to new tab
+    window.open(link, '_blank');
+  }
+
   return (
-    <section className="py-20">
+    <section id="projects-section" className="py-20">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,9 +90,9 @@ const ProjectsSection = ({ onOpenChat }: ProjectsSectionProps) => {
                   <Button 
                     variant="outline" 
                     className="w-full"
-                    onClick={() => onOpenChat()}
+                    onClick={() => openLink(project.link)}
                   >
-                    Talk to Me for Details
+                    Go to check it out
                   </Button>
                 </CardFooter>
               </Card>
