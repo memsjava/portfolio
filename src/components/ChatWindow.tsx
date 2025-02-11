@@ -60,7 +60,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const loadCurrentSession = async () => {
     try {
-      const response = await fetch('http://localhost:5050/chat/current-session', fetchConfig);
+      const response = await fetch('https://trano-vacance.mg/chat/current-session', fetchConfig);
       
       if (response.ok) {
         const session = await response.json();
@@ -85,7 +85,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const clearSession = async () => {
     try {
-      await fetch('http://localhost:5050/chat/sessions/clear', {
+      await fetch('https://trano-vacance.mg/chat/sessions/clear', {
         ...fetchConfig,
         method: 'POST',
       });
@@ -107,7 +107,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5050/chat/message', {
+      const response = await fetch('https://trano-vacance.mg/chat/message', {
         ...fetchConfig,
         method: 'POST',
         body: JSON.stringify({
@@ -147,7 +147,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          className="fixed bottom-4 right-4 w-96 bg-background rounded-lg shadow-lg border border-border z-50"
+          className="fixed bottom-0 right-0 w-full md:bottom-4 md:right-4 md:w-96 bg-background rounded-lg shadow-lg border border-border z-50"
         >
           <div className="flex items-center justify-between p-4 border-b border-border">
             <div className="flex items-center gap-2">
@@ -170,7 +170,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
               <X className="h-4 w-4" />
             </Button>
           </div>
-          <div className="h-[400px] p-4 overflow-y-auto">
+          <div className="h-[50vh] md:h-[400px] p-4 overflow-y-auto">
             <div className="space-y-4">
               <div className="chat-messages" ref={messagesEndRef}>
                 {messages.map((message, index) => (
@@ -179,7 +179,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
                       message.role === 'user'
                         ? 'ml-auto bg-primary text-primary-foreground'
                         : 'bg-accent'
-                    } rounded-lg p-3 max-w-[80%]`}
+                    } rounded-lg p-3 mb-3 max-w-[85%] md:max-w-[80%]`}
                   >
                     <ReactMarkdown className="text-sm prose prose-sm dark:prose-invert max-w-none">
                       {message.content}

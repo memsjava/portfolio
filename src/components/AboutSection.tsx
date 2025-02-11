@@ -39,8 +39,8 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">About Eric</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">About Eric</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
             As an AI Integration Specialist, I excel in bridging the gap between cutting-edge AI technology
             and practical business applications. With expertise in implementing AI solutions and creating
             seamless integrations, I help organizations leverage artificial intelligence to drive innovation
@@ -48,7 +48,7 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.title}
@@ -56,13 +56,13 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-card p-4 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
             >
-              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <skill.icon className="w-6 h-6" />
+              <div className="bg-primary/10 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-4 mx-auto">
+                <skill.icon className="w-5 h-5 md:w-6 md:h-6" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-center">{skill.title}</h3>
-              <p className="text-muted-foreground text-center text-sm">{skill.description}</p>
+              <h3 className="text-base md:text-lg font-semibold mb-2 text-center">{skill.title}</h3>
+              <p className="text-muted-foreground text-center text-xs md:text-sm">{skill.description}</p>
             </motion.div>
           ))}
         </div>

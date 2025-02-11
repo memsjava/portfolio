@@ -87,7 +87,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-primary mb-4 tracking-wide"
+            className="text-primary mb-4 tracking-wide text-sm md:text-base"
           >
             Eric - AI Integration Specialist
           </motion.p>
@@ -95,7 +95,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-4xl md:text-6xl font-bold mb-6"
+            className="text-3xl md:text-4xl lg:text-6xl font-bold mb-6"
           >
             Bringing AI Solutions
             <br />
@@ -105,7 +105,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-8"
+            className="text-muted-foreground text-sm md:text-lg lg:text-xl max-w-2xl mx-auto mb-8"
           >
             Specializing in seamless integration of artificial intelligence
             solutions for modern businesses
@@ -114,11 +114,12 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="mr-4" onClick={scrollToProjects}>
+            <Button size="lg" className="w-full sm:w-auto" onClick={scrollToProjects}>
               View Projects
             </Button>
-            <Button variant="outline" size="lg" onClick={() => setIsOpen(true)}>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => setIsOpen(true)}>
               Talk to Me
             </Button>
           </motion.div>

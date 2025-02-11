@@ -47,13 +47,13 @@ const ProjectsSection = ({ onOpenChat }: ProjectsSectionProps) => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
+          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto">
             A selection of my most impactful AI integration projects
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -61,41 +61,46 @@ const ProjectsSection = ({ onOpenChat }: ProjectsSectionProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="bg-card rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
-              <Card className="project-card h-full overflow-hidden">
-                <CardHeader className="p-0">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover"
-                  />
-                </CardHeader>
-                <CardContent className="p-6">
-                  <CardTitle className="mb-2">{project.title}</CardTitle>
-                  <p className="text-muted-foreground mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-accent px-3 py-1 rounded-full text-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="p-6 pt-0">
-                  <Button 
-                    variant="outline" 
-                    className="w-full"
+              <div className="relative h-48 sm:h-56 md:h-64">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-4 md:p-6">
+                <h3 className="text-lg md:text-xl font-semibold mb-2">{project.title}</h3>
+                <p className="text-muted-foreground text-sm md:text-base mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="bg-primary/10 text-primary px-2 py-1 rounded text-xs md:text-sm"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full sm:w-auto text-xs md:text-sm"
                     onClick={() => openLink(project.link)}
                   >
-                    Go to check it out
+                    View Project
                   </Button>
-                </CardFooter>
-              </Card>
+                  <Button
+                    size="sm"
+                    className="w-full sm:w-auto text-xs md:text-sm"
+                    onClick={() => onOpenChat()}
+                  >
+                    Discuss Project
+                  </Button>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
