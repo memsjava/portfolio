@@ -28,6 +28,15 @@ interface ChatWindowProps {
 
 const DEFAULT_SYSTEM_PROMPT = `coucou toi`;
 
+// Fetch configuration to ignore SSL certificate validation
+const fetchConfig = {
+  credentials: 'include' as RequestCredentials,
+  mode: 'cors' as RequestMode,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
 const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -50,9 +59,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const loadCurrentSession = async () => {
     try {
-      const response = await fetch('https://167.235.227.91/chat/current-session', {
-        credentials: 'include' // Important for cookies
-      });
+      const response = await fetch('https://trano-vacance.mg/chat/current-session', fetchConfig);
       
       if (response.ok) {
         const session = await response.json();
@@ -77,9 +84,9 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const clearSession = async () => {
     try {
-      await fetch(' https://167.235.227.91/chat/sessions/clear', {
+      await fetch('https://trano-vacance.mg/chat/sessions/clear', {
+        ...fetchConfig,
         method: 'POST',
-        credentials: 'include'
       });
       setMessages([{
         role: 'assistant',
@@ -99,12 +106,9 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(' https://167.235.227.91/chat/message', {
+      const response = await fetch('https://trano-vacance.mg/chat/message', {
+        ...fetchConfig,
         method: 'POST',
-        credentials: 'include', // Important for cookies
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
           messages: [...messages, userMessage],
           system_prompt: systemPrompt,
