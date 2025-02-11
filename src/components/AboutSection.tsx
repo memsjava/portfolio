@@ -1,32 +1,36 @@
 import { motion } from 'framer-motion';
 import { Brain, Code, Database, Network } from 'lucide-react';
+import { Button } from './ui/button';
+import { useChatStore } from '../store/chatStore';
 
 const skills = [
   {
     icon: Brain,
     title: "AI Implementation",
-    description: "Expert in implementing various AI models and solutions"
+    description: "Expert in implementing various AI models and solutions, specializing in LLMs and computer vision"
   },
   {
     icon: Code,
     title: "Integration Development",
-    description: "Seamless integration of AI with existing systems"
+    description: "Seamless integration of AI with existing systems and modern web applications"
   },
   {
     icon: Network,
     title: "API Development",
-    description: "Creating robust APIs for AI service consumption"
+    description: "Creating robust APIs for AI service consumption with high scalability"
   },
   {
     icon: Database,
     title: "Data Architecture",
-    description: "Designing scalable data solutions for AI systems"
+    description: "Designing scalable data solutions for AI systems and real-time processing"
   }
 ];
 
 const AboutSection = () => {
+  const { setIsOpen } = useChatStore();
+
   return (
-    <section className="py-20 bg-accent/50">
+    <section className="py-20 bg-secondary/20">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,16 +56,28 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-background/80 backdrop-blur-sm p-6 rounded-lg shadow-lg"
+              className="bg-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
             >
-              <div className="mb-4 text-primary">
-                <skill.icon size={32} />
+              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <skill.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">{skill.title}</h3>
-              <p className="text-muted-foreground">{skill.description}</p>
+              <h3 className="text-lg font-semibold mb-2 text-center">{skill.title}</h3>
+              <p className="text-muted-foreground text-center text-sm">{skill.description}</p>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <Button onClick={() => setIsOpen(true)}>
+            Let's Discuss Your Project
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

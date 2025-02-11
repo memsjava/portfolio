@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { motion } from 'framer-motion';
-import ChatWindow from './ChatWindow';
+import { useChatStore } from '../store/chatStore';
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const { setIsOpen } = useChatStore();
 
   useEffect(() => {
     const createParticle = () => {
@@ -118,14 +118,13 @@ const HeroSection = () => {
             <Button size="lg" className="mr-4" onClick={scrollToProjects}>
               View Projects
             </Button>
-            <Button variant="outline" size="lg" onClick={() => setIsChatOpen(true)}>
+            <Button variant="outline" size="lg" onClick={() => setIsOpen(true)}>
               Talk to Me
             </Button>
           </motion.div>
         </motion.div>
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background pointer-events-none" />
-      <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
 };

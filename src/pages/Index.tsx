@@ -1,19 +1,19 @@
-import { useState } from "react";
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import ChatWindow from "@/components/ChatWindow";
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import ProjectsSection from '../components/ProjectsSection';
+import ChatWindow from '../components/ChatWindow';
+import { useChatStore } from '../store/chatStore';
 
 const Index = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const { isOpen, setIsOpen } = useChatStore();
 
   return (
-    <main className="overflow-hidden">
+    <div className="relative">
       <HeroSection />
       <AboutSection />
-      <ProjectsSection onOpenChat={() => setIsChatOpen(true)} />
-      <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
-    </main>
+      <ProjectsSection onOpenChat={() => setIsOpen(true)} />
+      <ChatWindow isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </div>
   );
 };
 
