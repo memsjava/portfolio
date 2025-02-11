@@ -50,7 +50,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const loadCurrentSession = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/chat/current-session', {
+      const response = await fetch('https://167.235.227.91/chat/current-session', {
         credentials: 'include' // Important for cookies
       });
       
@@ -77,7 +77,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const clearSession = async () => {
     try {
-      await fetch('http://localhost:8000/api/chat/sessions/clear', {
+      await fetch(' https://167.235.227.91/chat/sessions/clear', {
         method: 'POST',
         credentials: 'include'
       });
@@ -99,7 +99,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/chat', {
+      const response = await fetch(' https://167.235.227.91/chat/message', {
         method: 'POST',
         credentials: 'include', // Important for cookies
         headers: {
