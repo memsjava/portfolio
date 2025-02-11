@@ -9,8 +9,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist -b gh-pages -r https://github.com/memsjava/portfolio.git"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
