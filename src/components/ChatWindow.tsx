@@ -45,6 +45,9 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
   const [systemPrompt, setSystemPrompt] = useState(DEFAULT_SYSTEM_PROMPT);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const BACKEND_URL = "https://trano-vacance.mg"
+  // const BACKEND_URL = "http://localhost:5050"
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -60,7 +63,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const loadCurrentSession = async () => {
     try {
-      const response = await fetch('https://trano-vacance.mg/chat/current-session', fetchConfig);
+      const response = await fetch(`${BACKEND_URL}/chat/current-session`, fetchConfig);
       
       if (response.ok) {
         const session = await response.json();
@@ -85,7 +88,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
 
   const clearSession = async () => {
     try {
-      await fetch('https://trano-vacance.mg/chat/sessions/clear', {
+      await fetch(`${BACKEND_URL}/chat/sessions/clear`, {
         ...fetchConfig,
         method: 'POST',
       });
@@ -107,7 +110,7 @@ const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://trano-vacance.mg/chat/message', {
+      const response = await fetch(`${BACKEND_URL}/chat/message`, {
         ...fetchConfig,
         method: 'POST',
         body: JSON.stringify({
